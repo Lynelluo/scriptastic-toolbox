@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Copy Title and URL as Markdown
 // @namespace    https://lynelluo.github.io/
-// @version      1.02
+// @version      1.04
 // @description  Copy current page title and URL in Markdown format using a hotkey or button
 // @author       lynel0625
 // @match        *://*/*
 // @grant        none
-// @icon         https://github.com/Lynelluo/scriptastic-toolbox/blob/main/scripts/Copy%20Title%20and%20URL%20as%20Markdown.png
+// @icon         https://raw.githubusercontent.com/Lynelluo/scriptastic-toolbox/main/scripts/Copy%20Title%20and%20URL%20as%20Markdown.png
 // @license MIT
 // @downloadURL https://update.greasyfork.org/scripts/504183/Copy%20Title%20and%20URL%20as%20Markdown.user.js
 // @updateURL https://update.greasyfork.org/scripts/504183/Copy%20Title%20and%20URL%20as%20Markdown.meta.js
@@ -52,11 +52,11 @@
 
     // Add event listener for 'Ctrl + Shift + y' or 'Command + Shift + y' shortcut
     document.addEventListener('keydown', function(e) {
-        // console.log("Key pressed:", e.key, "Ctrl:", e.ctrlKey, "Shift:", e.shiftKey, "Meta:", e.metaKey); // Debugging: log key events
-        if ((e.key === 'Y' && e.shiftKey && (e.ctrlKey || e.metaKey))) {
-            // console.log("Shortcut detected: Ctrl/Command + Shift + Y"); // Debugging: log when shortcut is detected
-            e.preventDefault(); // Uprevent default action
-            copyMarkdown();
+        if ((e.key === 'y' || e.key === 'Y') && e.shiftKey) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault(); // prevent default action
+                copyMarkdown();
+            }
         }
     });
 
