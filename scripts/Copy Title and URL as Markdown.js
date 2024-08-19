@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Title and URL as Markdown
 // @namespace    https://lynelluo.github.io/
-// @version      1.04
+// @version      1.05
 // @description  Copy current page title and URL in Markdown format using a hotkey or button
 // @author       lynel0625
 // @match        *://*/*
@@ -16,7 +16,15 @@
     function copyMarkdown() {
         var title = document.title;
         var url = window.location.href;
-        var markdown = `[${title}](${url})`;
+        var markdown;
+        // Regular expression to check for common image file extensions
+        var imageExtensions = /\.(jpg|jpeg|png|gif|bmp|webp|tiff)$/i;
+        // Determine if URL points to an image file
+        if (imageExtensions.test(url)) {
+            markdown = `![${title}](${url})`; // Markdown format for images
+        } else {
+            markdown = `[${title}](${url})`; // Markdown format for other links
+        }
 
         var textarea = document.createElement("textarea");
         textarea.value = markdown;
